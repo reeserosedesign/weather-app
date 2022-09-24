@@ -70,13 +70,16 @@ function displayForecast(response) {
 
   forecast.forEach(function (forecastDay, index) {
     if (index > 0 && index < 7) {
+      let iconCode = forecastDay.weather[0].icon;
+      let forecastWeatherIcon = document.querySelector(
+        "#forecast-weather-icon"
+      );
+
       forecastHTML =
         forecastHTML +
         `<div class="iconGroup">
             <h3 class="day">${formatForecastDate(forecastDay.dt)}</h3>
-            <div class="icon"><img src="https://openweathermap.org/img/wn/${
-              forecastDay.weather[0].icon
-            }@4x.png" alt="${
+            <div class="icon"><img src="https://openweathermap.org/img/wn/${iconCode}@4x.png" id=forecast-weather-icon" alt="${
           forecastDay.weather[0].description
         }" id="forecast-icon" width="64px"></div>
             <p>
@@ -113,6 +116,57 @@ function getWeather(response) {
   let weatherIcon = document.querySelector("#weather-icon");
   let iconCode = response.data.weather[0].icon;
 
+  if (iconCode === "01d") {
+    weatherIcon.setAttribute("src", "media/clear-day.svg");
+  } else {
+    if (iconCode === "01n") {
+      weatherIcon.setAttribute("src", "media/clear-night.svg");
+    } else {
+      if (iconCode === "02d") {
+        weatherIcon.setAttribute("src", "media/few-clouds-day.svg");
+      } else {
+        if (iconCode === "02n") {
+          weatherIcon.setAttribute("src", "media/few-clouds-night.svg");
+        } else {
+          if (
+            iconCode === "03d" ||
+            iconCode === "03n" ||
+            iconCode === "04d" ||
+            iconCode === "04n"
+          ) {
+            weatherIcon.setAttribute("src", "media/few-clouds-night.svg");
+          } else {
+            if (
+              iconCode === "09d" ||
+              iconCode === "09n" ||
+              iconCode === "10d" ||
+              iconCode === "10n"
+            ) {
+              weatherIcon.setAttribute("src", "media/rain.svg");
+            } else {
+              if (iconCode === "11d" || iconCode === "11n") {
+                weatherIcon.setAttribute("src", "media/thunder.svg");
+              } else {
+                if (iconCode === "13d" || iconCode === "13n") {
+                  weatherIcon.setAttribute("src", "media/snow.svg");
+                } else {
+                  if (iconCode === "50d" || iconCode === "50n") {
+                    weatherIcon.setAttribute("src", "media/mist.svg");
+                  } else {
+                    weatherIcon.setAttribute(
+                      "src",
+                      `https://openweathermap.org/img/wn/${iconCode}@4x.png`
+                    );
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   currentTemp.innerHTML = Math.round(response.data.main.temp);
   tempHigh.innerHTML = Math.round(response.data.main.temp_max);
   tempLow.innerHTML = Math.round(response.data.main.temp_min);
@@ -120,10 +174,6 @@ function getWeather(response) {
   weatherDescription.innerHTML = response.data.weather[0].description;
   humidity.innerHTML = response.data.main.humidity;
   windSpeed.innerHTML = Math.round(response.data.wind.speed);
-  weatherIcon.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${iconCode}@4x.png`
-  );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
   tempF = response.data.main.temp;
