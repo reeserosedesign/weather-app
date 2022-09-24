@@ -25,24 +25,18 @@
 
     <div class="container">
       <div class="topRow">
-        <div class="emojiGroup">
-          <div class="emoji" id="weather-icon">🌥</div>
-          <h3 id="weather-description">Cloudy</h3>
-        </div>
-
         <div class="currentWeather">
-          <h1><span id="current-temp">20</span>°</h1> <span id="unit"><span class="activeUnit">C</span>
-          <span style="color:#6a6e72;font-weight:200;">|</span>
-          <span class="inactiveUnit">F</span></span>
+          <img src="" alt="" id="weather-icon" /><h1><span id="current-temp"></span>°</h1><span id="unit"><a href="#" id="fahrenheit" class="active">F</a> |
+          <a href="#" id="celsius">C</a></span>
           <ul>
-            <li>Humidity: <span id="humidity">68</span>%</li>
-            <li>Wind: <span id="wind-speed">10</span><span id="wind-speed-unit">km/h</span></li>
+            <li>Humidity: <span id="humidity"></span>%</li>
+            <li>Wind: <span id="wind-speed"></span><span id="wind-speed-unit">mph</span></li>
           </ul>
         </div>
 
         <div class="location">
-            <h3 id="date-time">12:00 PM on Monday, September 5th, 2022</h3>
-          <h2 id="city">Los Angeles</h2>
+          <h2><span id="weather-description"></span> in <span id="city"></span></h2>
+          <h3 id="date-time"></h3>
         </div>
       </div>
 
@@ -50,63 +44,73 @@
 
       <div class="middleRow">
         <div class="forecast">
-          <div class="emojiGroup">
-            <p>Tue</p>
-            <div class="emoji">🌥</div>
-            <h3>
-              <span class="tempHigh">75°</span>
-              <span class="tempLow">55°</span>
-            </h3>
+          <div class="iconGroup">
+            <h3 class="day">Day</h3>
+            <div class="icon">🌥</div>
+            <p>
+              <span class="tempHigh">80</span><strong>°</strong>
+              <span class="tempLow">50</span>°
+            </p>
           </div>
 
-          <div class="emojiGroup">
-            <p>Wed</p>
-            <div class="emoji">🌧</div>
-            <h3>
-              <span class="tempHigh">71°</span>
-              <span class="tempLow">58°</span>
-            </h3>
+          <div class="iconGroup">
+            <h3 class="day">Day</h3>
+            <div class="icon">🌥</div>
+            <p>
+              <span class="tempHigh">80</span><strong>°</strong>
+              <span class="tempLow">50</span>°
+            </p>
           </div>
 
-          <div class="emojiGroup">
-            <p>Thu</p>
-            <div class="emoji">☀️</div>
-            <h3>
-              <span class="tempHigh">84°</span>
-              <span class="tempLow">61°</span>
-            </h3>
+          <div class="iconGroup">
+            <h3 class="day">Day</h3>
+            <div class="icon">🌥</div>
+            <p>
+              <span class="tempHigh">80</span><strong>°</strong>
+              <span class="tempLow">50</span>°
+            </p>
           </div>
 
-          <div class="emojiGroup">
-            <p>Fri</p>
-            <div class="emoji">⛈</div>
-            <h3>
-              <span class="tempHigh">68°</span>
-              <span class="tempLow">53°</span>
-            </h3>
+          <div class="iconGroup">
+            <h3 class="day">Day</h3>
+            <div class="icon">🌥</div>
+            <p>
+              <span class="tempHigh">80</span><strong>°</strong>
+              <span class="tempLow">50</span>°
+            </p>
           </div>
 
-          <div class="emojiGroup">
-            <p>Sat</p>
-            <div class="emoji">☀️</div>
-            <h3>
-              <span class="tempHigh">86°</span>
-              <span class="tempLow">62°</span>
-            </h3>
+          <div class="iconGroup">
+            <h3 class="day">Day</h3>
+            <div class="icon">🌥</div>
+            <p>
+              <span class="tempHigh">80</span><strong>°</strong>
+              <span class="tempLow">50</span>°
+            </p>
           </div>
+
+          <div class="iconGroup">
+            <h3 class="day">Day</h3>
+            <div class="icon">🌥</div>
+            <p>
+              <span class="tempHigh">80</span><strong>°</strong>
+              <span class="tempLow">50</span>°
+            </p>
+          </div>
+
         </div>
       </div>
 
       <div class="spacer"></div>
 
       <div class="bottomRow">
-        <form>
-          <input type="text" placeholder="Enter City Here" id="search"/>
-          <input type="submit" value="Change City" id="change-city"/>
+        <form id="form">
+          <input type="text" placeholder="Enter City Here" id="search-form" autocomplete="off"/>
+          <input type="submit" value="Search" id="change-city"/>
         </form>
         <div class="quickLookup">
           <p>
-            Quick Lookup:
+            ex.
             <div class="cities">
               <ul>
                 <li id="current-location">Current Location</li>
@@ -118,12 +122,11 @@
           </p>
         </div>
       </div>
-
       <div class="footer">
         <p><a href="https://github.com/reeserosedesign/weather-app" target="_blank">Open Source Code</a> by <a href="https://www.reeserosedesign.com" target="_blank">Reese Rose</a></p>
       </div>
     </div>
 
-    <script src="src/index.js"></script>
+    <script src="src/app.js"></script>
   </body>
 </html>
