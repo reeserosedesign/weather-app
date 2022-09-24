@@ -43,7 +43,16 @@ body {
 @media only screen and (max-width: 400px) {
   .container {
     width: 90vw;
-    margin: 16px;
+    margin: 8px;
+    padding: 16px;
+  }
+
+  input[type="submit"] {
+    -webkit-appearance: none;
+  }
+
+  .currentWeather {
+    margin-left: -36px;
   }
 }
 
