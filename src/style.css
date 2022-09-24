@@ -36,7 +36,14 @@ body {
 @media only screen and (max-width: 900px) {
   .container {
     width: 80vw;
-    margin: 24px;
+    margin: 24px auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    width: 90vw;
+    margin: 16px;
   }
 }
 
@@ -73,6 +80,90 @@ ul {
 
 li {
   list-style: none;
+}
+
+#forecast h3,
+#date-time {
+  color: var(--grey);
+}
+
+.currentWeather {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.currentWeather ul {
+  margin-left: 16px;
+  position: relative;
+}
+
+.currentWeather h1 {
+  display: flex;
+  text-align: right;
+}
+
+.currentWeather img {
+  display: inline;
+}
+
+#weather-description {
+  text-transform: capitalize;
+}
+
+.location {
+  text-align: center;
+}
+
+#unit {
+  display: flex;
+  font-size: 24px;
+  font-weight: 400;
+  position: relative;
+  margin-top: -16px;
+}
+
+#unit a {
+  text-decoration: none;
+  color: var(--blue);
+  padding: 0 4px;
+}
+
+.active {
+  color: var(--black) !important;
+  cursor: default;
+  font-weight: 600;
+}
+
+.active:hover {
+  text-decoration: none;
+}
+
+#forecast {
+  margin: 32px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.iconGroup {
+  text-align: center;
+}
+
+.tempHigh {
+  font-weight: 700;
+}
+
+.tempLow {
+  font-weight: 400;
+}
+
+.bottomRow {
+  padding: 16px;
+  background-color: #6a6e7220;
+  border-radius: var(--border-radius);
 }
 
 form {
@@ -116,72 +207,6 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
-.bottomRow {
-  padding: 16px;
-  background-color: #6a6e7220;
-  border-radius: var(--border-radius);
-}
-
-.icon {
-  font-size: 64px;
-  line-height: 100%;
-}
-
-.iconGroup {
-  text-align: center;
-}
-
-.forecast h3,
-#date-time {
-  color: var(--grey);
-}
-
-.currentWeather {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-left: -24px;
-}
-
-.currentWeather ul {
-  margin-left: 16px;
-  position: relative;
-}
-
-.currentWeather h1 {
-  display: flex;
-  text-align: right;
-}
-
-.currentWeather img {
-  display: inline;
-}
-
-#weather-description {
-  text-transform: capitalize;
-}
-
-.location {
-  text-align: center;
-}
-
-.forecast {
-  margin: 32px auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.tempHigh {
-  font-weight: 700;
-}
-
-.tempLow {
-  font-weight: 400;
-}
-
 .quickLookup {
   margin: 16px auto 0 auto;
   display: flex;
@@ -199,30 +224,6 @@ input[type="submit"]:hover {
 .cities li:hover {
   color: var(--dark-blue);
   cursor: pointer;
-}
-
-#unit {
-  display: flex;
-  font-size: 24px;
-  font-weight: 400;
-  position: relative;
-  margin-top: -16px;
-}
-
-#unit a {
-  text-decoration: none;
-  color: var(--blue);
-  padding: 0 4px;
-}
-
-.active {
-  color: var(--black) !important;
-  cursor: default;
-  font-weight: 600;
-}
-
-.active:hover {
-  text-decoration: none;
 }
 
 .footer {

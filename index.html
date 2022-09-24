@@ -26,9 +26,11 @@
     <div class="container">
       <div class="topRow">
         <div class="currentWeather">
-          <img src="" alt="" id="weather-icon" /><h1><span id="current-temp"></span>°</h1><span id="unit"><a href="#" id="fahrenheit" class="active">F</a> |
+          <img src="" alt="" id="weather-icon" width="96px"/><h1><span id="current-temp"></span>°</h1><span id="unit"><a href="#" id="fahrenheit" class="active">F</a> |
           <a href="#" id="celsius">C</a></span>
           <ul>
+            <li><span id="temp-high" class="tempHigh"></span><strong>°</strong>
+            <span id="temp-low"></span>°</li>
             <li>Humidity: <span id="humidity"></span>%</li>
             <li>Wind: <span id="wind-speed"></span><span id="wind-speed-unit">mph</span></li>
           </ul>
@@ -40,68 +42,8 @@
         </div>
       </div>
 
-      <div class="spacer"></div>
-
-      <div class="middleRow">
-        <div class="forecast">
-          <div class="iconGroup">
-            <h3 class="day">Day</h3>
-            <div class="icon">🌥</div>
-            <p>
-              <span class="tempHigh">80</span><strong>°</strong>
-              <span class="tempLow">50</span>°
-            </p>
-          </div>
-
-          <div class="iconGroup">
-            <h3 class="day">Day</h3>
-            <div class="icon">🌥</div>
-            <p>
-              <span class="tempHigh">80</span><strong>°</strong>
-              <span class="tempLow">50</span>°
-            </p>
-          </div>
-
-          <div class="iconGroup">
-            <h3 class="day">Day</h3>
-            <div class="icon">🌥</div>
-            <p>
-              <span class="tempHigh">80</span><strong>°</strong>
-              <span class="tempLow">50</span>°
-            </p>
-          </div>
-
-          <div class="iconGroup">
-            <h3 class="day">Day</h3>
-            <div class="icon">🌥</div>
-            <p>
-              <span class="tempHigh">80</span><strong>°</strong>
-              <span class="tempLow">50</span>°
-            </p>
-          </div>
-
-          <div class="iconGroup">
-            <h3 class="day">Day</h3>
-            <div class="icon">🌥</div>
-            <p>
-              <span class="tempHigh">80</span><strong>°</strong>
-              <span class="tempLow">50</span>°
-            </p>
-          </div>
-
-          <div class="iconGroup">
-            <h3 class="day">Day</h3>
-            <div class="icon">🌥</div>
-            <p>
-              <span class="tempHigh">80</span><strong>°</strong>
-              <span class="tempLow">50</span>°
-            </p>
-          </div>
-
+        <div id="forecast">
         </div>
-      </div>
-
-      <div class="spacer"></div>
 
       <div class="bottomRow">
         <form id="form">

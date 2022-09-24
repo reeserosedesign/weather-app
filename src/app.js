@@ -55,8 +55,57 @@ function formatDate(timestamp) {
   dateTime.innerHTML = `${time} on ${fullDate}`;
 }
 
+function formatForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = "";
+  let forecast = response.data.daily;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 7) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="iconGroup">
+            <h3 class="day">${formatForecastDate(forecastDay.dt)}</h3>
+            <div class="icon"><img src="https://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@4x.png" alt="${
+          forecastDay.weather[0].description
+        }" id="forecast-icon" width="64px"></div>
+            <p>
+              <span class="tempHigh forecast-temp-high">${Math.round(
+                forecastDay.temp.max
+              )}</span><strong>°</strong>
+              <span class="tempLow forecast-temp-low">${Math.round(
+                forecastDay.temp.min
+              )}</span>°
+            </p>
+          </div>`;
+      forecastElement.innerHTML = forecastHTML;
+    }
+  });
+}
+
+function getForecast(coordinates) {
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function getWeather(response) {
   let currentTemp = document.querySelector("#current-temp");
+  let tempHigh = document.querySelector("#temp-high");
+  let tempLow = document.querySelector("#temp-low");
   let city = document.querySelector("#city");
   let weatherDescription = document.querySelector("#weather-description");
   let humidity = document.querySelector("#humidity");
@@ -65,29 +114,36 @@ function getWeather(response) {
   let iconCode = response.data.weather[0].icon;
 
   currentTemp.innerHTML = Math.round(response.data.main.temp);
+  tempHigh.innerHTML = Math.round(response.data.main.temp_max);
+  tempLow.innerHTML = Math.round(response.data.main.temp_min);
   city.innerHTML = response.data.name;
   weatherDescription.innerHTML = response.data.weather[0].description;
   humidity.innerHTML = response.data.main.humidity;
   windSpeed.innerHTML = Math.round(response.data.wind.speed);
   weatherIcon.setAttribute(
     "src",
-    `https://openweathermap.org/img/wn/${iconCode}@2x.png`
+    `https://openweathermap.org/img/wn/${iconCode}@4x.png`
   );
   weatherIcon.setAttribute("alt", response.data.weather[0].description);
+
   tempF = response.data.main.temp;
+  tempHighF = response.data.main.temp_max;
+  tempLowF = response.data.main.temp_min;
+
+  getForecast(response.data.coord);
 }
 
 function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
   axios.get(apiUrl).then(getWeather);
 }
 
 function search(city) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiKey = "a43564c91a6c605aeb564c9ed02e3858";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(getWeather);
 }
@@ -101,33 +157,43 @@ function handleSubmit(event) {
 function changeUnitC(event) {
   event.preventDefault();
   let currentTemp = document.querySelector("#current-temp");
-  let tempC = (tempF - 32) * (5 / 9);
+  let tempC = ((tempF - 32) * 5) / 9;
+  let tempHighC = ((tempHighF - 32) * 5) / 9;
+  let tempLowC = ((tempLowF - 32) * 5) / 9;
+  let windSpeed = document.querySelector("#wind-speed");
+  let windSpeedUnit = document.querySelector("#wind-speed-unit");
+  let tempHigh = document.querySelector("#temp-high");
+  let tempLow = document.querySelector("#temp-low");
+
   currentTemp.innerHTML = Math.round(tempC);
   fahrenheit.classList.remove("active");
   celsius.classList.add("active");
-
-  let windSpeed = document.querySelector("#wind-speed");
   windSpeed.innerHTML = Math.round(windSpeed.innerHTML * 1.609);
-
-  let windSpeedUnit = document.querySelector("#wind-speed-unit");
   windSpeedUnit.innerHTML = "km/h";
+  tempHigh.innerHTML = Math.round(tempHighC);
+  tempLow.innerHTML = Math.round(tempLowC);
 }
 
 function changeUnitF(event) {
   event.preventDefault;
   let currentTemp = document.querySelector("#current-temp");
+  let windSpeed = document.querySelector("#wind-speed");
+  let windSpeedUnit = document.querySelector("#wind-speed-unit");
+  let tempHigh = document.querySelector("#temp-high");
+  let tempLow = document.querySelector("#temp-low");
+
   currentTemp.innerHTML = Math.round(tempF);
   celsius.classList.remove("active");
   fahrenheit.classList.add("active");
-
-  let windSpeed = document.querySelector("#wind-speed");
   windSpeed.innerHTML = Math.round(windSpeed.innerHTML / 1.609);
-
-  let windSpeedUnit = document.querySelector("#wind-speed-unit");
   windSpeedUnit.innerHTML = "mph";
+  tempHigh.innerHTML = Math.round(tempHighF);
+  tempLow.innerHTML = Math.round(tempLowF);
 }
 
 let tempF = null;
+let tempHighF = null;
+let tempLowF = null;
 
 let form = document.querySelector("#form");
 form.addEventListener("submit", handleSubmit);
